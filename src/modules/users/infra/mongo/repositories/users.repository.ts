@@ -17,13 +17,17 @@ export class UsersRepository implements UserRepositoryContract {
     return foundUser;
   }
 
-  async create({
-    name,
-    email,
-    password,
-  }: CreateUserDTO): Promise<UserDocument> {
-    const createdUser = await this.userModel.create({ name, email, password });
+  async create({ name, email, password }: CreateUserDTO): Promise<User> {
+    const createdUser = await this.userModel.create({
+      name,
+      email,
+      password,
+    });
 
-    return createdUser;
+    const serializedUser = createdUser.toObject<User>();
+
+    delete serializedUser.password;
+
+    return serializedUser;
   }
 }
