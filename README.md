@@ -18,3 +18,10 @@
 - [ ] Use puppeteer to create the crawler.
 - [ ] Use Whatsapp API to send the invoice to user.
 - [ ] Use mongo db atlas as database
+
+### To do
+
+#### Generate invoice
+
+- [ ] Create background job that will be executed by a cron expression.
+      This will be a background job because can be it's a expensive process
