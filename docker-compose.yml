@@ -11,6 +11,13 @@ services:
     networks:
       - default
 
+  redis:
+    image: redis:6.2
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data
+
   api:
     container_name: issue-invoice
     build:
@@ -27,6 +34,10 @@ services:
     networks:
       - default
     command: npm run start:dev
+
+volumes:
+  cache:
+    driver: local
 
 networks:
   default:
