@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  database:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo-user
+      - MONGO_INITDB_ROOT_PASSWORD=9COt3I2uHypbTdo5
+    ports:
+      - 27017:27017
+    networks:
+      - default
+
+  api:
+    container_name: issue-invoice
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    depends_on:
+      - database
+    networks:
+      - default
+    command: npm run start:dev
+
+networks:
+  default:
